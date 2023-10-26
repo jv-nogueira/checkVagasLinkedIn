@@ -24,14 +24,14 @@ Após a automação ser iniciada, o projeto percorrerá as vagas automaticamente
 - SO: Windows 10 Pro
 
 ## Contribuição
-Ficaria feliz com contribuições para aprimorar a automação de busca por vagas de emprego. Isso aumentará as chances das pessoas encontrarem oportunidades de trabalho. Se você tiver dúvidas, precisar de suporte ou desejar um script personalizado, entre em contato comigo pelo e-mail <a href="mailto:jvnogueira2010@gmail.com">jvnogueira2010@gmail.com</a>.
+Ficaria feliz com contribuições para aprimorar a automação de busca por vagas de emprego. Isso aumentará as chances das pessoas encontrarem oportunidades de trabalho. Se você tiver dúvidas, precisar de suporte ou desejar um script personalizado, entre em contato comigo.
 
 ## Mantenedor
 - [João Vitor Nogueira](https://github.com/jv-nogueira)
 
 ## Contato
-- <a href="mailto:jvnogueira2010@gmail.com">jvnogueira2010@gmail.com</a>
-- Contate-me no LinkedIn [www.linkedin.com/in/nogueira-jv](https://www.linkedin.com/in/nogueira-jv/)
+- E-mail: <a href="mailto:jvnogueira2010@gmail.com">jvnogueira2010@gmail.com</a>
+- LinkedIn: [www.linkedin.com/in/nogueira-jv](https://www.linkedin.com/in/nogueira-jv/)
 
 
 
