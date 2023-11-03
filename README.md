@@ -14,7 +14,7 @@ Por enquanto, a automação está sendo realizada no console do navegador. Siga 
 No futuro, planejo criar uma extensão para o navegador para simplificar o processo.
 
 ## Uso
-Após a automação ser iniciada, o projeto percorrerá as vagas automaticamente. Se encontrar palavras-chave relevantes na descrição, abrirá a vaga em uma nova aba. Você pode então extrair os endereços de e-mail dessas vagas e registrá-los em uma planilha separada e assim entrar em contato com os recrutadores de forma rápida realizando dísparo de e-mail a todos de uma vez.
+Após a automação ser iniciada, o projeto percorrerá as vagas automaticamente. Se encontrar as palavras-chave na descrição, abrirá a vaga em uma nova aba e continuará a percorrer as demais vagas. Você pode então registrar os dados dessas vagas e entrar em contato com os recrutadores. Para o script parar, dê F5.
 
 ## Tecnologias Utilizadas
 - JavaScript
