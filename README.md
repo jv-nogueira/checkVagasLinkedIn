@@ -1,4 +1,4 @@
-# Automação de Palavras-chave na Análise de Vagas no LinkedIn
+# Automação para Pesquisa de Vagas no LinkedIn
 
 ## Descrição
 Este projeto automatiza a análise de vagas de emprego no LinkedIn percorrendo as vagas automaticamente e na vaga que informar o salário será aberta em uma nova aba do navegador. 
