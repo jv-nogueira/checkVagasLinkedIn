@@ -15,11 +15,9 @@ document.addEventListener("keydown", function(event) {
             window.open(indexURL)
           }
           i++; 
-          var indexURL = indexLista.querySelector('a').href; // busca diretamente o link
-          console.log(indexURL);
+          var indexURL = indexLista.querySelector('a').href;
           i++; // incrementa o índice para o próximo item
 
-          // Aguarda 1 segundo antes de continuar para evitar loop rápido demais
           setTimeout(loopLista, 1000);
         } else {
           console.log("Todos os elementos foram percorridos ou elemento não encontrado.");
