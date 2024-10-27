@@ -1,9 +1,12 @@
 {
-    "manifest_version": 2,
-    "name": "percorrerListaVagasLinkedIn",
-    "description": "",
+    "manifest_version": 3,
+    "name": "Percorre Lista de Vagas no LinkedIn",
+    "description": "Ao conter o salário no título será aberta em nova aba",
     "version": "0.1",
     "permissions": ["activeTab"],
+    "icons": { 
+        "48": "icons/linkedin.png"
+},
 
     "content_scripts": [
         {
