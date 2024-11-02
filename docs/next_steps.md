@@ -23,5 +23,5 @@ Abaixo estão as próximas etapas para continuar o desenvolvimento do projeto.
 8. **Implementar remoção das vagas pelo título**
    - Clicar em remover na vaga que for de estágio 
 
-9. **Criar interface de opções**
-   - Opção de parar assim que encontrar a vaga
+9. **Criar prompt de opções**
+   - Opção de parar assim que encontrar a vaga, colocar segundos entre cada vaga

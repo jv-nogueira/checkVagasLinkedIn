@@ -5,7 +5,7 @@
     "version": "0.1",
     "permissions": ["activeTab"],
     "icons": { 
-        "48": "icons/linkedin.png"
+        "48": "icons/automacao.png"
 },
 
     "content_scripts": [

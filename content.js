@@ -1,7 +1,7 @@
 document.addEventListener("keydown", function(event) {
   if (event.keyCode === 113) {
-    var question = confirm("Deseja começar a percorrer?");
-    if (question) {
+    var question1 = prompt("Quantos segundos para percorrer cada vaga?")
+    if (question1 > 0) {
       var index1 = 0;
       
       function loopLista1() {
@@ -18,7 +18,7 @@ document.addEventListener("keydown", function(event) {
           }
 
           index1++; // Incrementa o índice para o próximo item
-          setTimeout(loopLista1, 25); // Aguarda 1 segundo antes de percorrer o próximo item
+          setTimeout(loopLista1, question1*1000); // Aguarde cada segundo para percorrer o próximo item
         } else {
           loopLista2(); // Todos os elementos foram percorridos; chama o loop de paginação
         }
