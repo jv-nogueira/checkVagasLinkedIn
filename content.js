@@ -1,6 +1,7 @@
 document.addEventListener("keydown", function(event) {
   if (event.keyCode === 113) {
     var question1 = prompt("Quantos segundos para percorrer cada vaga?")
+    var question2 = prompt("Qual palavra procurar?").toLowerCase()
     if (question1 > 0) {
       var index1 = 0;
       
@@ -8,17 +9,20 @@ document.addEventListener("keydown", function(event) {
         var listaElementos = document.querySelectorAll('.scaffold-layout__list-container')[0].children;
         if (index1 < listaElementos.length) {
           var indexLista = listaElementos[index1];
+          indexLista.children[0].children[0].click()
           indexLista.scrollIntoView(); // Rola a página para o elemento ficar visível
 
-          var salaryTrue = indexLista?.children[0]?.children[0]?.children[0]?.children[0]?.children[1]?.children[3];
+          setTimeout(() => {
+          var descriptionTrue = document.querySelectorAll(".mt4")[2].children[0].textContent.toLowerCase().includes(question2); 
           var indexURL = indexLista.querySelector('a')?.href;
           
-          if (salaryTrue && indexURL) {
-            window.open(indexURL);
+          if (descriptionTrue && indexURL) { 
+            window.open(indexURL, '_blank', 'width=800,height=600');
           }
 
           index1++; // Incrementa o índice para o próximo item
-          setTimeout(loopLista1, question1*1000); // Aguarde cada segundo para percorrer o próximo item
+          loopLista1()
+          }, question1*1000); // Aguarde cada segundo para percorrer o próximo item
         } else {
           loopLista2(); // Todos os elementos foram percorridos; chama o loop de paginação
         }

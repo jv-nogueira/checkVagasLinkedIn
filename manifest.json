@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
-    "name": "Percorre Lista de Vagas no LinkedIn",
-    "description": "Ao conter o salário no título será aberta em nova aba",
+    "name": "Coincide a descrição LinkedIn",
+    "description": "Ao conter a palavra procurada na descrição, então vai ser aberta em nova página",
     "version": "0.1",
     "permissions": ["activeTab"],
     "icons": { 
