@@ -17,7 +17,7 @@ document.addEventListener("keydown", function(event) {
           var indexURL = indexLista.querySelector('a')?.href;
           
           if (descriptionTrue && indexURL) { 
-            window.open(indexURL, '_blank', 'width=800,height=600');
+            window.open(indexURL, '_blank', `width=800,height=${screen.availHeight}`);
           }
 
           index1++; // Incrementa o índice para o próximo item
