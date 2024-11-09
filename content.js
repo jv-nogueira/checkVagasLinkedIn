@@ -40,7 +40,7 @@ function loopLista1() {
       var indexURL = indexLista.querySelector('a')?.href;
       
       if (descriptionTrue && indexURL) { 
-        window.open(indexURL, '_blank', `width=800,height=${screen.availHeight}`);
+        // window.open(indexURL, '_blank', `width=800,height=${screen.availHeight}`);
 
         // Extrair informações de título e nome da empresa
         let tituloVaga = indexLista.children[0].children[0].children[0].children[0].children[1].children[0].children[0].children[0].children[0].textContent;
