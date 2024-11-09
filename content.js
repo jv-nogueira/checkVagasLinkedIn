@@ -36,7 +36,15 @@ function loopLista1() {
     setTimeout(() => {
       if (!running) return; // Interrompe o loop se running for false
       
-      var descriptionTrue = document.querySelectorAll(".mt4")[2].children[0].textContent.toLowerCase().includes(question2); 
+      // Tenta pegar a descrição com o primeiro método
+      let descriptionTrue;
+      try {
+        descriptionTrue = document.querySelectorAll(".mt4")[2].children[0].textContent.toLowerCase().includes(question2);
+      } catch (e) {
+        // Caso falhe, tenta com o segundo método
+        descriptionTrue = document.querySelectorAll(".mt4")[1]?.textContent.toLowerCase().includes(question2);
+      }
+
       var indexURL = indexLista.querySelector('a')?.href;
       
       if (descriptionTrue && indexURL) { 
