@@ -1,6 +1,7 @@
 let running = false; // Variável para controlar o estado do script
 let index1 = 0;
 let question1, question2;
+let vagasStorage = []; // Armazena as vagas coletadas
 
 document.addEventListener("keydown", function(event) {
   if (event.keyCode === 113) { // F2 para iniciar/parar
@@ -14,9 +15,10 @@ document.addEventListener("keydown", function(event) {
         loopLista1();
       }
     } else {
-      // Para o script
+      // Para o script e gera o CSV
       running = false;
       console.log("Script interrompido.");
+      gerarCSV(); // Gera o arquivo CSV ao interromper o script
     }
   }
 });
@@ -39,6 +41,13 @@ function loopLista1() {
       
       if (descriptionTrue && indexURL) { 
         window.open(indexURL, '_blank', `width=800,height=${screen.availHeight}`);
+
+        // Extrair informações de título e nome da empresa
+        let tituloVaga = indexLista.children[0].children[0].children[0].children[0].children[1].children[0].children[0].children[0].children[0].textContent;
+        let nomeEmpresa = indexLista.children[0].children[0].children[0].children[0].children[1].children[1].children[0].innerText;
+        
+        // Armazena os dados no array
+        vagasStorage.push({ titulo: tituloVaga, empresa: nomeEmpresa, link: indexURL });
       }
       
       index1++;
@@ -63,8 +72,35 @@ function loopLista2() {
       setTimeout(loopLista1, 2000);
     } else {
       console.log("Fim da navegação ou botão de próxima página não encontrado.");
+      gerarCSV(); // Gera o arquivo CSV ao final da navegação
     }
   } else {
     console.log("Elemento de paginação não encontrado.");
+    gerarCSV(); // Gera o arquivo CSV se não houver paginação
   }
+}
+
+function gerarCSV() {
+  // Cria o conteúdo do CSV com cabeçalhos
+  let csvContent = "\uFEFFTítulo da Vaga;Empresa;Link\n";
+  
+  // Preenche o conteúdo do CSV com os dados das vagas
+  vagasStorage.forEach(vaga => {
+    csvContent += `${vaga.titulo};${vaga.empresa};${vaga.link}\n`;
+  });
+
+  // Cria um Blob com o conteúdo do CSV
+  let blob = new Blob([csvContent], { type: "text/csv" });
+  
+  // Cria um link para fazer o download do CSV
+  let link = document.createElement("a");
+  link.href = window.URL.createObjectURL(blob);
+  link.download = "vagasStorage.csv";
+  
+  // Adiciona o link à página e clica automaticamente para iniciar o download
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  console.log("CSV gerado com sucesso.");
 }
