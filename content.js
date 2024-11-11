@@ -39,16 +39,35 @@ function loopLista1() {
     setTimeout(() => {
       if (!running) return; // Interrompe o loop se running for false
       
-      // Tenta pegar a descrição com o primeiro método
-      let descriptionTrue;
+      let descriptionText1, descriptionText2;
+      let descriptionTrue = false;
+
       try {
-        // Verifica se alguma das palavras está na descrição
-        let descriptionText = document.getElementsByClassName("text-heading-large")[0].parentNode.children[1].textContent.toLowerCase();
-        descriptionTrue = question2.some(palavra => descriptionText.includes(palavra)); // Verifica se qualquer palavra está presente
+        descriptionText1 = document.getElementsByClassName("text-heading-large")[0].parentNode.children[1].textContent.toLowerCase();
       } catch (e) {
-        // Caso falhe, tenta com o segundo método
-        let descriptionText = document.querySelectorAll(".mt4")[1]?.textContent.toLowerCase();
-        descriptionTrue = question2.some(palavra => descriptionText.includes(palavra)); // Verifica se qualquer palavra está presente
+        console.log("Descrição 1 não encontrada.");
+      }
+
+      try {
+        descriptionText2 = document.getElementsByClassName("jobs-description__details")[0].parentNode.textContent.toLowerCase();
+      } catch (e) {
+        console.log("Descrição 2 não encontrada.");
+      }
+
+      // Se ambas as descrições não existirem, interrompe o loop
+      if (!descriptionText1 && !descriptionText2) {
+        console.log("Ambas as descrições não foram encontradas. Interrompendo o loop.");
+        running = false;
+        gerarCSV();
+        return;
+      }
+
+      // Verifica se qualquer palavra-chave está presente em pelo menos uma das descrições
+      if (descriptionText1) {
+        descriptionTrue = question2.some(palavra => descriptionText1.includes(palavra));
+      }
+      if (!descriptionTrue && descriptionText2) {
+        descriptionTrue = question2.some(palavra => descriptionText2.includes(palavra));
       }
 
       var indexURL = indexLista.querySelector('a')?.href;
