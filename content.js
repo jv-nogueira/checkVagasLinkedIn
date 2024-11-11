@@ -8,8 +8,11 @@ document.addEventListener("keydown", function(event) {
     if (!running) {
       // Inicia o script
       question1 = prompt("Quantos segundos para percorrer cada vaga?");
-      question2 = prompt("Qual palavra procurar?").toLowerCase();
+      question2 = prompt("Quais palavras procurar? (Separe por vírgula)").toLowerCase();
+      
       if (question1 > 0) {
+        // Converte a string de palavras separadas por vírgula em um array de palavras
+        question2 = question2.split(",");
         running = true;
         console.log("Script iniciado.");
         loopLista1();
@@ -39,17 +42,18 @@ function loopLista1() {
       // Tenta pegar a descrição com o primeiro método
       let descriptionTrue;
       try {
-        descriptionTrue = document.querySelectorAll(".mt4")[2].children[0].textContent.toLowerCase().includes(question2);
+        // Verifica se alguma das palavras está na descrição
+        let descriptionText = document.getElementsByClassName("text-heading-large")[0].parentNode.children[1].textContent.toLowerCase();
+        descriptionTrue = question2.some(palavra => descriptionText.includes(palavra)); // Verifica se qualquer palavra está presente
       } catch (e) {
         // Caso falhe, tenta com o segundo método
-        descriptionTrue = document.querySelectorAll(".mt4")[1]?.textContent.toLowerCase().includes(question2);
+        let descriptionText = document.querySelectorAll(".mt4")[1]?.textContent.toLowerCase();
+        descriptionTrue = question2.some(palavra => descriptionText.includes(palavra)); // Verifica se qualquer palavra está presente
       }
 
       var indexURL = indexLista.querySelector('a')?.href;
       
       if (descriptionTrue && indexURL) { 
-        // window.open(indexURL, '_blank', `width=800,height=${screen.availHeight}`);
-
         // Extrair informações de título e nome da empresa
         let tituloVaga = indexLista.children[0].children[0].children[0].children[0].children[1].children[0].children[0].children[0].children[0].textContent;
         let nomeEmpresa = indexLista.children[0].children[0].children[0].children[0].children[1].children[1].children[0].innerText;
