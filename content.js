@@ -40,45 +40,65 @@ function loopLista1() {
       if (!running) return; // Interrompe o loop se running for false
       
       let descriptionText1, descriptionText2;
-      let descriptionTrue = false;
+      let palavrasEncontradas = [];
 
       try {
+        // Extrair o título da vaga
+        var tituloVaga = listaElementos[index1].children[0].children[0].children[0].children[0].children[1].children[0].children[0].children[0].children[0].textContent.toLowerCase();
+        
+        // Verifica se alguma das palavras-chave está no título
+        palavrasEncontradas = question2.filter(palavra => tituloVaga.includes(palavra));
+        let titleHasKeywords = palavrasEncontradas.length > 0;
+      } catch (e) {
+        console.log("Erro ao obter o título da vaga.");
+      }
+
+      try {
+        // Primeira descrição
         descriptionText1 = document.getElementsByClassName("text-heading-large")[0].parentNode.children[1].textContent.toLowerCase();
       } catch (e) {
         console.log("Descrição 1 não encontrada.");
       }
 
       try {
+        // Segunda descrição
         descriptionText2 = document.getElementsByClassName("jobs-description__details")[0].parentNode.textContent.toLowerCase();
       } catch (e) {
         console.log("Descrição 2 não encontrada.");
       }
 
-      // Se ambas as descrições não existirem, interrompe o loop
-      if (!descriptionText1 && !descriptionText2) {
-        console.log("Ambas as descrições não foram encontradas. Interrompendo o loop.");
+      // Se ambas as descrições não existirem e o título não tiver palavras-chave, interrompe o loop
+      if (!descriptionText1 && !descriptionText2 && palavrasEncontradas.length === 0) {
+        console.log("Nenhum campo encontrado com palavras-chave. Interrompendo o loop.");
         running = false;
         gerarCSV();
         return;
       }
 
-      // Verifica se qualquer palavra-chave está presente em pelo menos uma das descrições
+      // Adiciona palavras encontradas nas descrições, se existirem
       if (descriptionText1) {
-        descriptionTrue = question2.some(palavra => descriptionText1.includes(palavra));
+        palavrasEncontradas.push(...question2.filter(palavra => descriptionText1.includes(palavra)));
       }
-      if (!descriptionTrue && descriptionText2) {
-        descriptionTrue = question2.some(palavra => descriptionText2.includes(palavra));
+      if (descriptionText2) {
+        palavrasEncontradas.push(...question2.filter(palavra => descriptionText2.includes(palavra)));
       }
+
+      // Remove duplicatas das palavras encontradas
+      palavrasEncontradas = [...new Set(palavrasEncontradas)];
 
       var indexURL = indexLista.querySelector('a')?.href;
       
-      if (descriptionTrue && indexURL) { 
-        // Extrair informações de título e nome da empresa
-        let tituloVaga = indexLista.children[0].children[0].children[0].children[0].children[1].children[0].children[0].children[0].children[0].textContent;
+      if (palavrasEncontradas.length > 0 && indexURL) { 
+        // Extrair informações do nome da empresa
         let nomeEmpresa = indexLista.children[0].children[0].children[0].children[0].children[1].children[1].children[0].innerText;
         
-        // Armazena os dados no array
-        vagasStorage.push({ titulo: tituloVaga, empresa: nomeEmpresa, link: indexURL });
+        // Armazena os dados no array, incluindo as palavras encontradas
+        vagasStorage.push({
+          titulo: tituloVaga,
+          empresa: nomeEmpresa,
+          palavras: palavrasEncontradas.join(", "),
+          link: indexURL
+        });
       }
       
       index1++;
@@ -113,11 +133,11 @@ function loopLista2() {
 
 function gerarCSV() {
   // Cria o conteúdo do CSV com cabeçalhos
-  let csvContent = "\uFEFFTítulo da Vaga;Empresa;Link\n";
+  let csvContent = "\uFEFFTítulo da Vaga;Empresa;Palavras-Chave Encontradas;Link\n";
   
   // Preenche o conteúdo do CSV com os dados das vagas
   vagasStorage.forEach(vaga => {
-    csvContent += `${vaga.titulo};${vaga.empresa};${vaga.link}\n`;
+    csvContent += `${vaga.titulo};${vaga.empresa};${vaga.palavras};${vaga.link}\n`;
   });
 
   // Cria um Blob com o conteúdo do CSV
