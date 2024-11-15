@@ -45,42 +45,29 @@ function loopLista1() {
       try {
         // Extrair o título da vaga
         var tituloVaga = listaElementos[index1].children[0].children[0].children[0].children[0].children[1].children[0].children[0].children[0].children[0].textContent.toLowerCase();
-        
+      } catch (e) {
+        palavrasEncontradas.push("Sem título 1");
+      }
+
         // Verifica se alguma das palavras-chave está no título
         palavrasEncontradas = question2.filter(palavra => tituloVaga.includes(palavra));
         let titleHasKeywords = palavrasEncontradas.length > 0;
-      } catch (e) {
-        console.log("Erro ao obter o título da vaga.");
-      }
+
 
       try {
         // Primeira descrição
-        descriptionText1 = document.getElementsByClassName("text-heading-large")[0].parentNode.children[1].textContent.toLowerCase();
+        descriptionText1 = document.getElementsByClassName("text-heading-large")[1].parentNode.textContent.toLowerCase()
       } catch (e) {
-        console.log("Descrição 1 não encontrada.");
-      }
-
-      try {
-        // Segunda descrição
-        descriptionText2 = document.getElementsByClassName("jobs-description__details")[0].parentNode.textContent.toLowerCase();
-      } catch (e) {
-        console.log("Descrição 2 não encontrada.");
-      }
-
-      // Se ambas as descrições não existirem e o título não tiver palavras-chave, interrompe o loop
-      if (!descriptionText1 && !descriptionText2 && palavrasEncontradas.length === 0) {
-        console.log("Nenhum campo encontrado com palavras-chave. Interrompendo o loop.");
-        running = false;
-        gerarCSV();
-        return;
+        palavrasEncontradas.push("Sem descrição 1");
       }
 
       // Adiciona palavras encontradas nas descrições, se existirem
       if (descriptionText1) {
+        if(descriptionText1.includes("sobre a vaga")){
         palavrasEncontradas.push(...question2.filter(palavra => descriptionText1.includes(palavra)));
-      }
-      if (descriptionText2) {
-        palavrasEncontradas.push(...question2.filter(palavra => descriptionText2.includes(palavra)));
+        }else{
+          palavrasEncontradas.push("Sem descrição 2");
+        }
       }
 
       // Remove duplicatas das palavras encontradas
