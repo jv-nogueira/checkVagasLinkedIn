@@ -58,17 +58,29 @@ function loopLista1() {
         // Primeira descrição
         descriptionText1 = document.getElementsByClassName("text-heading-large")[1].parentNode.textContent.toLowerCase()
       } catch (e) {
-        palavrasEncontradas.push("Sem descrição 1");
+        console.log("Sem descrição 1");
+      }
+
+
+      try {
+        // Segunda descrição
+        descriptionText2 = document.getElementsByClassName("text-heading-large")[0].parentNode.textContent.toLowerCase()
+      } catch (e) {
+        console.log("Sem descrição 2");
       }
 
       // Adiciona palavras encontradas nas descrições, se existirem
-      if (descriptionText1) {
+      if(descriptionText1){
         if(descriptionText1.includes("sobre a vaga")){
-        palavrasEncontradas.push(...question2.filter(palavra => descriptionText1.includes(palavra)));
-        }else{
-          palavrasEncontradas.push("Sem descrição 2");
-        }
-      }
+          palavrasEncontradas.push(...question2.filter(palavra => descriptionText1.includes(palavra)));
+          }
+        }else if(descriptionText2){
+          if(descriptionText2.includes("sobre a vaga")){
+            palavrasEncontradas.push(...question2.filter(palavra => descriptionText2.includes(palavra)));
+            }
+          }else{
+            palavrasEncontradas.push("Sem descrição 3");
+            }
 
       // Remove duplicatas das palavras encontradas
       palavrasEncontradas = [...new Set(palavrasEncontradas)];
