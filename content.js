@@ -82,13 +82,20 @@ function loopLista1() {
       // Remove duplicatas das palavras encontradas
       palavrasEncontradas = [...new Set(palavrasEncontradas)];
 
+
+      let salary = "";
+      try {
+        salary = document.querySelectorAll('.scaffold-layout__list-container')[0].children[index1].children[0]?.children[0]?.children[0]?.children[0]?.children[1]?.children[3].innerText
+      } catch (e) {
+        console.log("Elemento de salário não encontrado.");
+      }
+
       let candidatos = "";
       try {
         candidatos = document.getElementsByClassName("t-black--light mt2")[0].children[4]?.textContent;
       } catch (e) {
         console.log("Elemento de candidatos não encontrado.");
       }
-
 
       let anuncia = "";
       try {
@@ -117,6 +124,7 @@ function loopLista1() {
           titulo: tituloVaga,
           empresa: nomeEmpresa,
           palavras: palavrasEncontradas.join(", "),
+          salary: salary,
           candidatos: candidatos,
           anuncia: anuncia,
           candidatura: candidaturaSimplificada,
@@ -156,11 +164,11 @@ function loopLista2() {
 
 function gerarCSV() {
   // Cria o conteúdo do CSV com cabeçalhos
-  let csvContent = "\uFEFFTítulo da Vaga;Empresa;Palavras-Chave Encontradas;Candidatos;Anuncio da vaga;Candidatura Simplificada;Link\n";
+  let csvContent = "\uFEFFTítulo da Vaga;Empresa;Palavras-Chave Encontradas;Salário;Candidatos;Anuncio da vaga;Candidatura Simplificada;Link\n";
   
   // Preenche o conteúdo do CSV com os dados das vagas
   vagasStorage.forEach(vaga => {
-    csvContent += `${vaga.titulo};${vaga.empresa};${vaga.palavras};${vaga.candidatos};${vaga.anuncia};${vaga.candidatura};${vaga.link}\n`;
+    csvContent += `${vaga.titulo};${vaga.empresa};${vaga.palavras};${vaga.salary};${vaga.candidatos};${vaga.anuncia};${vaga.candidatura};${vaga.link}\n`;
   });
 
   // Cria um Blob com o conteúdo do CSV

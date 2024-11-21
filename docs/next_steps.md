@@ -17,36 +17,36 @@ Abaixo estão as próximas etapas para continuar o desenvolvimento do projeto.
 5. **~~Implementa pesquisa na descrição de cada vaga~~**
    - ~~Abrir a vaga que corresponder a palavra-chave.~~
 
-7. **~~Analisa se há necessidade de mensurar as vagas abertas~~**
+6. **~~Analisa se há necessidade de mensurar as vagas abertas~~**
    - ~~Mensurar em qual página foi aberta, o salário, cargo, a fim de buscar melhorias.~~
 
-8. **Implementa remoção das vagas pelo título**
+7. **Implementa remoção das vagas pelo título**
    - Clicar em remover na vaga que for de estágio ou exclusiva
 
-9. **~~Cria prompt de opções~~**
+8. **~~Cria prompt de opções~~**
    - ~~Opção de parar assim que encontrar a vaga, colocar segundos entre cada vaga.~~
 
-10. **Implementa operadores na palavra-chave**
+9. **Implementa operadores na palavra-chave**
    - Operadores AND e OR ao fazer a procura
 
-11. **Verifica se já está salva no LinkedIn**
+10. **Verifica se já está salva no LinkedIn**
    - Se a vaga já está salva, então ignora
 
-12. **Começa de onde está selecionado**
+11. **Começa de onde está selecionado**
    - Evita que o index comece do zero
 
-13. **~~Salva as vagas em CSV~~**
+12. **~~Salva as vagas em CSV~~**
    - ~~Título, empresa e link~~
 
-14. **~~Botão para stop~~**
+13. **~~Botão para stop~~**
 
-15. **Verifica se a vaga está salva na planilha**
+14. **Verifica se a vaga está salva na planilha**
    - Caso afirmativo, então pula para a próxima vaga
 
-16. **Salva outras informações em CSV**
-   - Exemplo: o que foi escrito na pesquisa da vaga no LinkedIn, quais foram as palavras-chave pesquisadas, salário (caso houver), número de resultados na pesquisa da vaga, data atual, data de anúncio da vaga, localidade utilizada na pesquisa, classificação utilizada (relevantes ou recentes), se a vaga é de candidatura simplificada, competências solicitas na descrição da vaga e modalidade (presencial, híbrido ou remoto)
+15. **Salva outras informações em CSV**
+   - Exemplo: o que foi escrito na pesquisa da vaga no LinkedIn, quais foram as palavras-chave pesquisadas, salário (caso houver), ~~número de resultados na pesquisa da vaga~~, data atual, ~~data de anúncio da vaga~~, localidade utilizada na pesquisa, classificação utilizada (relevantes ou recentes), ~~se a vaga é de candidatura simplificada~~, competências solicitas na descrição da vaga e modalidade (presencial, híbrido ou remoto)
 
-17. **Pesquisa a palavra-chave no título da vaga**
+16. **Pesquisa a palavra-chave no título da vaga**
 
 18. **Inclui na planilha as vagas sem descrição e título**
    - Verifica na descrição se contêm "Sobre a vaga"
