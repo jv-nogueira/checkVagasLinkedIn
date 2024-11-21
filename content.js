@@ -49,53 +49,77 @@ function loopLista1() {
         palavrasEncontradas.push("Sem título 1");
       }
 
-        // Verifica se alguma das palavras-chave está no título
-        palavrasEncontradas = question2.filter(palavra => tituloVaga.includes(palavra));
-        let titleHasKeywords = palavrasEncontradas.length > 0;
-
+      // Verifica se alguma das palavras-chave está no título
+      palavrasEncontradas = question2.filter(palavra => tituloVaga.includes(palavra));
 
       try {
         // Primeira descrição
-        descriptionText1 = document.getElementsByClassName("text-heading-large")[1].parentNode.textContent.toLowerCase()
+        descriptionText1 = document.getElementsByClassName("text-heading-large")[1].parentNode.textContent.toLowerCase();
       } catch (e) {
         console.log("Sem descrição 1");
       }
 
-
       try {
         // Segunda descrição
-        descriptionText2 = document.getElementsByClassName("text-heading-large")[0].parentNode.textContent.toLowerCase()
+        descriptionText2 = document.getElementsByClassName("text-heading-large")[0].parentNode.textContent.toLowerCase();
       } catch (e) {
         console.log("Sem descrição 2");
       }
 
       // Adiciona palavras encontradas nas descrições, se existirem
-      if(descriptionText1){
-        if(descriptionText1.includes("sobre a vaga")){
+      if (descriptionText1) {
+        if (descriptionText1.includes("sobre a vaga")) {
           palavrasEncontradas.push(...question2.filter(palavra => descriptionText1.includes(palavra)));
-          }
-        }else if(descriptionText2){
-          if(descriptionText2.includes("sobre a vaga")){
-            palavrasEncontradas.push(...question2.filter(palavra => descriptionText2.includes(palavra)));
-            }
-          }else{
-            palavrasEncontradas.push("Sem descrição 3");
-            }
+        }
+      } else if (descriptionText2) {
+        if (descriptionText2.includes("sobre a vaga")) {
+          palavrasEncontradas.push(...question2.filter(palavra => descriptionText2.includes(palavra)));
+        }
+      } else {
+        palavrasEncontradas.push("Sem descrição 3");
+      }
 
       // Remove duplicatas das palavras encontradas
       palavrasEncontradas = [...new Set(palavrasEncontradas)];
 
+      let candidatos = "";
+      try {
+        candidatos = document.getElementsByClassName("t-black--light mt2")[0].children[4]?.textContent;
+      } catch (e) {
+        console.log("Elemento de candidatos não encontrado.");
+      }
+
+
+      let anuncia = "";
+      try {
+        anuncia = document.getElementsByClassName("t-black--light mt2")[0].children[2]?.textContent;
+      } catch (e) {
+        console.log("Elemento de anuncia não encontrado.");
+      }
+
+      let candidaturaSimplificada = "";
+      try {
+        if (document.getElementsByClassName("jobs-apply-button--top-card")[0]?.children[0]?.children[1]?.innerText === "Candidatura simplificada") {
+          candidaturaSimplificada = "TRUE";
+        }
+      } catch (e) {
+        console.log("Elemento de candidatura simplificada não encontrado.");
+      }
+
       var indexURL = indexLista.querySelector('a')?.href;
-      
-      if (palavrasEncontradas.length > 0 && indexURL) { 
+
+      if (palavrasEncontradas.length > 0 && indexURL) {
         // Extrair informações do nome da empresa
-        let nomeEmpresa = indexLista.children[0].children[0].children[0].children[0].children[1].children[1].children[0].innerText;
-        
+        let nomeEmpresa = indexLista.children[0].children[0].children[0].children[0].children[1].children[1].children[0]?.innerText;
+
         // Armazena os dados no array, incluindo as palavras encontradas
         vagasStorage.push({
           titulo: tituloVaga,
           empresa: nomeEmpresa,
           palavras: palavrasEncontradas.join(", "),
+          candidatos: candidatos,
+          anuncia: anuncia,
+          candidatura: candidaturaSimplificada,
           link: indexURL
         });
       }
@@ -132,11 +156,11 @@ function loopLista2() {
 
 function gerarCSV() {
   // Cria o conteúdo do CSV com cabeçalhos
-  let csvContent = "\uFEFFTítulo da Vaga;Empresa;Palavras-Chave Encontradas;Link\n";
+  let csvContent = "\uFEFFTítulo da Vaga;Empresa;Palavras-Chave Encontradas;Candidatos;Anuncio da vaga;Candidatura Simplificada;Link\n";
   
   // Preenche o conteúdo do CSV com os dados das vagas
   vagasStorage.forEach(vaga => {
-    csvContent += `${vaga.titulo};${vaga.empresa};${vaga.palavras};${vaga.link}\n`;
+    csvContent += `${vaga.titulo};${vaga.empresa};${vaga.palavras};${vaga.candidatos};${vaga.anuncia};${vaga.candidatura};${vaga.link}\n`;
   });
 
   // Cria um Blob com o conteúdo do CSV
