@@ -28,8 +28,9 @@ document.addEventListener("keydown", function(event) {
 
 function loopLista1() {
   if (!running) return; // Interrompe o loop se running for false
-  
-  var listaElementos = document.querySelectorAll('.scaffold-layout__list-container')[0].children;
+  const span = Array.from(document.querySelectorAll('span')).find(el => el.textContent.trim() === 'Configurar alerta');
+
+  var listaElementos = span.parentNode.parentNode.parentNode.parentNode.parentNode.children[1].children[3].children;
   
   if (index1 < listaElementos.length) {
     var indexLista = listaElementos[index1];
